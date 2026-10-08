@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PharmaTrack - Available Stocks</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F9FCFB;
+            color: #1F2937;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #006D5B;
+            color: #FFFFFF;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background-color: #10B981;
+        }
+
+        nav a.active {
+            background-color: #FFFFFF;
+            color: #006D5B;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            text-decoration: none;
+            color: #006D5B;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .page-title h2 {
+            color: #006D5B;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #6B7280;
+        }
+
+        /* TABLE */
+        .table-box {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #E6F7F3;
+            color: #006D5B;
+            text-align: left;
+            padding: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        tr:hover {
+            background-color: #F9FCFB;
+        }
+
+        .medicine-name {
+            font-weight: bold;
+            color: #006D5B;
+        }
+
+        .stock-number {
+            font-weight: bold;
+        }
+
+        .low-stock {
+            color: #DC2626;
+            font-weight: bold;
+        }
+
+        .normal-stock {
+            color: #006D5B;
+            font-weight: bold;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #6B7280;
+            padding: 25px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            main {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .page-title h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <h1>💊 PharmaTrack</h1>
+
+        <nav>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="stocks.html" class="active">
+                Stocks
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- BACK TO DASHBOARD -->
+
+        <a href="dashboard.html" class="back-button">
+            ← Back to Dashboard
+        </a>
+
+
+        <!-- TITLE -->
+
+        <section class="page-title">
+
+            <h2>Available Stocks</h2>
+
+            <p>
+                Monitor the available stock of each medicine.
+            </p>
+
+        </section>
+
+
+        <!-- TABLE -->
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Medicine Name</th>
+
+                        <th>Category</th>
+
+                        <th>Price</th>
+
+                        <th>Available Stock</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="stockTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* GET MEDICINES FROM LOCAL STORAGE */
+
+        const medicines =
+            JSON.parse(
+                localStorage.getItem("pharmaTrackMedicines")
+            ) || [];
+
+
+        const stockTable =
+            document.getElementById("stockTable");
+
+
+        /* CHECK IF THERE ARE NO MEDICINES */
+
+        if (medicines.length === 0) {
+
+            stockTable.innerHTML = `
+                <tr>
+                    <td colspan="5" class="empty-message">
+                        No medicines added yet.
+                    </td>
+                </tr>
+            `;
+
+        } else {
+
+
+            /* DISPLAY EACH MEDICINE */
+
+            medicines.forEach(function(medicine) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                let status = "";
+                let statusClass = "";
+
+
+                /* STOCK STATUS */
+
+                if (Number(medicine.stock) === 0) {
+
+                    status = "Out of Stock";
+                    statusClass = "low-stock";
+
+                } else if (Number(medicine.stock) <= 10) {
+
+                    status = "Low Stock";
+                    statusClass = "low-stock";
+
+                } else {
+
+                    status = "Available";
+                    statusClass = "normal-stock";
+
+                }
+
+
+                row.innerHTML = `
+
+                    <td class="medicine-name">
+                        ${medicine.name}
+                    </td>
+
+                    <td>
+                        ${medicine.category}
+                    </td>
+
+                    <td>
+                        ₱${parseFloat(medicine.price).toFixed(2)}
+                    </td>
+
+                    <td class="stock-number">
+                        ${medicine.stock}
+                    </td>
+
+                    <td class="${statusClass}">
+                        ${status}
+                    </td>
+
+                `;
+
+
+                stockTable.appendChild(row);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

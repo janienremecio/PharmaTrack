@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PharmaTrack - Dashboard</title>
+
+    <style>
+
+        /* GENERAL */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F9FCFB;
+            color: #1F2937;
+        }
+
+
+        /* HEADER */
+
+        header {
+            background-color: #006D5B;
+            color: #FFFFFF;
+
+            padding: 15px 5%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+
+        /* NAVIGATION */
+
+        nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background-color: #10B981;
+        }
+
+
+        /* ACTIVE PAGE */
+
+        nav a.active {
+            background-color: #FFFFFF;
+            color: #006D5B;
+            font-weight: bold;
+        }
+
+
+        /* MAIN */
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+
+            margin: 40px auto;
+        }
+
+
+        /* WELCOME */
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            color: #006D5B;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #6B7280;
+
+            font-size: 17px;
+
+            margin-top: 0;
+        }
+
+
+        /* DASHBOARD CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* CARD */
+
+        .card {
+            display: block;
+
+            background-color: #FFFFFF;
+
+            border: 1px solid #E2E8F0;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            text-decoration: none;
+
+            color: #1F2937;
+
+            box-sizing: border-box;
+
+            transition: 0.2s;
+        }
+
+
+        /* CARD HOVER */
+
+        .card:hover {
+            border-color: #10B981;
+
+            background-color: #E6F7F3;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* CARD ICON */
+
+        .card-icon {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* CARD TITLE */
+
+        .card h3 {
+            color: #006D5B;
+
+            margin: 5px 0 8px;
+        }
+
+
+        /* CARD DESCRIPTION */
+
+        .card p {
+            color: #6B7280;
+
+            margin: 0;
+
+            line-height: 1.5;
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 768px) {
+
+            header {
+                padding: 15px 4%;
+            }
+
+            main {
+                width: 90%;
+
+                margin: 30px auto;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* PHONE */
+
+        @media (max-width: 600px) {
+
+            header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+
+                justify-content: flex-start;
+
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 8px 10px;
+            }
+
+            main {
+                width: 90%;
+
+                margin: 25px auto;
+            }
+
+            .welcome h2 {
+                font-size: 24px;
+            }
+
+            .welcome p {
+                font-size: 15px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>💊 PharmaTrack</h1>
+
+
+        <nav>
+
+            <!-- CURRENT PAGE -->
+
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main>
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h2>
+                Pharmacy Management System
+            </h2>
+
+            <p>
+                Welcome, Admin!
+                Manage your pharmacy easily.
+            </p>
+
+        </section>
+
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <section class="cards">
+
+
+            <!-- MANAGE MEDICINES -->
+
+            <a href="medicines.html" class="card">
+
+                <div class="card-icon">
+                    💊
+                </div>
+
+                <h3>
+                    Manage Medicines
+                </h3>
+
+                <p>
+                    Add, edit, and delete
+                    medicine information.
+                </p>
+
+            </a>
+
+
+
+            <!-- CATEGORIES -->
+
+            <a href="categories.html" class="card">
+
+                <div class="card-icon">
+                    📁
+                </div>
+
+                <h3>
+                    Categories
+                </h3>
+
+                <p>
+                    Organize medicines
+                    by category.
+                </p>
+
+            </a>
+
+
+
+            <!-- AVAILABLE STOCKS -->
+
+            <a href="stocks.html" class="card">
+
+                <div class="card-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Available Stocks
+                </h3>
+
+                <p>
+                    Monitor available
+                    medicine stocks.
+                </p>
+
+            </a>
+
+
+
+            <!-- EXPIRATION DATES -->
+
+            <a href="expiration.html" class="card">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Expiration Dates
+                </h3>
+
+                <p>
+                    Monitor medicine
+                    expiration dates.
+                </p>
+
+            </a>
+
+
+
+            <!-- CUSTOMER PURCHASES -->
+
+            <a href="purchases.html" class="card">
+
+                <div class="card-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Customer Purchases
+                </h3>
+
+                <p>
+                    Manage customer
+                    purchases.
+                </p>
+
+            </a>
+
+
+
+            <!-- TOTAL COST -->
+
+            <a href="total-cost.html" class="card">
+
+                <div class="card-icon">
+                    🧾
+                </div>
+
+                <h3>
+                    Total Cost
+                </h3>
+
+                <p>
+                    Calculate the total
+                    cost of medicines purchased.
+                </p>
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
